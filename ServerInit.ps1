@@ -1,8 +1,21 @@
-# Defina suas variáveis
+# Variavés de inicialização
+$azAccountEmail = "Email-da-conta"
+$azAccountPassword = "Senha-do-email"
+$azTentantID = "Tentant-ID"
+
+$resourceGroupName = "Grupo_Recursos"
+$vmName = "Nome_da_VM"
+
+$vmUser = "usuario-local"
+$vmPassword = "senha-local"
+
 $vmPublicIP = "IP_Publico_da_VM"
 $scriptPath = "C:\Caminho\Para\Start.bat"
-$vmUser = "antony.matheus"
-$vmPassword = "Placeholder123"
+
+# Conectando-se ao Azure
+Connect-AzAccount -Credential $cred -TenantId $azTentantID
+
+Start-AzVM -ResourceGroupName $resourceGroupName -Name $vmName -force
 
 # Aguarde alguns segundos após a inicialização da VM antes de executar o script
 Start-Sleep -Seconds 120  # Ajuste conforme necessário

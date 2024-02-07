@@ -1,14 +1,13 @@
-# Defina suas variáveis
-$resourceGroupName = "NomeDoGrupoDeRecursos"
-$vmName = "NomeDaVM"
-$vmUser = "antony.matheus"
-$vmPassword = "Placeholder123"
+# Definir variáveis
+$resourceGroupName = "Grupo_Recursos"
+$vmName = "Nome_da_VM"
 
-# Autenticar no Azure (uma vez por sessão)
-az login
+$username = "Usuario_de_Acesso"
+$password = ConvertTo-SecureString "SenhaDeAcesso" -AsPlainText -Force
+$cred = New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
+
+# Autenticação sem prompt
+Connect-AzAccount -Credential $cred -TenantId "Tenant-ID"
 
 # Iniciar a VM
-Start-AzVM -ResourceGroupName $resourceGroupName -Name $vmName
-
-# Aguarde alguns segundos para garantir que a VM está iniciada
-Start-Sleep -Seconds 60  # Ajuste conforme necessário
+Start-AzVM -ResourceGroupName $resourceGroupName -Name $vmName -force
